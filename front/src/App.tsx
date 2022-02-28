@@ -56,22 +56,18 @@ const App = () => {
     }
   
   const conditionalRowStyles = [
-    {
-      when: (row: IRow) => row.title.length > 0,
-      style: (row: IRow) => ({background: colors.tableBackground, 
-        color: 'white',
-        borderRadius: '5px'})
-    },
     {                          
       when: (row: IRow) => row.isSelected == true,
-      style: (row: IRow) => ({ backgroundColor: colors.selected, color: 'white' }),
+      style: { backgroundColor: colors.selected, color: 'white' },
     },
   ];
 
   const customStyles = {
     rows: {
         style: {
-            cursor: 'pointer'
+          background: colors.tableBackground,
+          color: 'white',
+          cursor: 'pointer'
         },
     },
     headCells: {
