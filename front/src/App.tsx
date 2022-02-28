@@ -74,7 +74,18 @@ const App = () => {
   }
 
 
-
+  interface IColor{
+    primary: string;
+    secondary: string;
+    background: string;
+  }
+  const colors : IColor = 
+    {
+      primary: '#FE938C',
+      secondary: '#EDAF97',
+      background: '#674642'
+    }
+  
   const conditionalRowStyles = [
     // {
     //   when: row => row.calories < 300,
@@ -87,13 +98,36 @@ const App = () => {
     //   },
     // },
     // You can also pass a callback to style for additional customization
+    {
+      when: (row: IRow) => row.title.length > 0,
+      style: (row: IRow) => ({background: colors.secondary})
+    },
     {                          
       when: (row: IRow) => row.isSelected == true,
-      style: (row: IRow) => ({ backgroundColor: 'rgba(63, 195, 128, 0.9)', color: 'white' }),
+      // style: (row: IRow) => ({ backgroundColor: 'rgba(63, 195, 128, 0.9)', color: '#CC5803' }),
+      style: (row: IRow) => ({ backgroundColor: colors.primary, color: 'black' }),
     },
   ];
 
-
+  const customStyles = {
+    // rows: {
+    //     style: {
+    //         minHeight: '72px', // override the row height
+    //     },
+    // },
+    headCells: {
+        style: {
+            background: colors.background, // override the cell padding for head cells
+            color: 'white'
+        },
+    },
+    // cells: {
+    //     style: {
+    //         paddingLeft: '8px', // override the cell padding for data cells
+    //         paddingRight: '8px',
+    //     },
+    // },
+};
 
 
 
@@ -124,7 +158,7 @@ const App = () => {
           // onSelectedRowsChange={(selected) => handleRowSelected(selected.selectedRows)}
           onRowClicked={(row) => handleClick(row)}
           conditionalRowStyles={conditionalRowStyles}
-          // customStyles={customStyles}
+          customStyles={customStyles}
         />
       </div>
     </div>

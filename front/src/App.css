@@ -28,8 +28,20 @@ body{
 }
 
 
-
+body{
+  background: #C49792;
+  color: 9D91A3;
+}
 
 .rdt_TableRow{
   cursor: pointer;
+  background: red;
+}
+
+.rdt_Table{
+  background: red;
+}
+
+.rdt_TableHeader{
+  background: blue;
 }
