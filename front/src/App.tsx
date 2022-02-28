@@ -5,9 +5,30 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import AddBookModal from './add-book';
-import { IRow, IData } from './interfaces/row-interfaces'
-import { columns } from './columns/main-columns'
 
+interface IRow{
+  id: number;
+  title: string;
+  author: string
+}
+
+interface IData {
+  id: number;
+  title: string;
+  author: string;
+  publication_year: number;
+}
+
+const columns = [
+  {
+    name: 'Tytuł',
+    selector: (row: IRow) => row.title,
+  },
+  {
+    name: 'Autor',
+    selector: (row: IRow) => row.author,
+  },
+]
 
 const App = () => {
   
