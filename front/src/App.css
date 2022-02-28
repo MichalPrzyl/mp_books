@@ -1,0 +1,28 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+body{
+  margin: 10px;
+}
+.cont{
+  border: 1px solid black;
+}
+
+.book{
+  /* background: rgb(255, 118, 118); */
+  /* border-top: 1px solid black; */
+}
+
+.text-right{
+  text-align: right;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.bg-1{
+  background: rgb(190, 190, 190);
+}
+
+.bg-2{
+  background: rgb(175, 175, 175);
+}

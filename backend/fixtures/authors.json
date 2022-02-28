@@ -1,0 +1,62 @@
+[{
+	"model": "books.author",
+ 	"pk": 1,
+ 	"fields": {
+		"first_name": "Zbigniew",
+ 		"last_name": "Nienacki"}},
+
+ {
+	"model": "books.author",
+ 	"pk": 3,
+ 	"fields": {
+		"first_name": "Danielle",
+ 		"last_name": "Steel"}},
+ {
+	"model": "books.author",
+ 	"pk": 4,
+ 	"fields": {
+		"first_name": "Lemony",
+ 		"last_name": "Snicket"}},
+ {
+	"model": "books.author",
+ 	"pk": 5,
+ 	"fields": {
+		"first_name": "B.",
+ 		"last_name": "Rosiek"}},
+ {
+	"model": "books.author",
+ 	"pk": 6,
+ 	"fields": {
+		"first_name": "Janusz",
+ 		"last_name": "Bochenek"}},
+ {
+	"model": "books.author",
+ 	"pk": 7,
+ 	"fields": {
+		"first_name": "Edmund",
+ 		"last_name": "Niziurski"}},
+ {
+	"model": "books.author",
+ 	"pk": 8,
+ 	"fields": {
+		"first_name": "Stephenie",
+ 		"last_name": "Meyer"}},
+ {
+	"model": "books.author",
+ 	"pk": 9,
+ 	"fields": {
+		"first_name": "Robert",
+ 		"last_name": "T. Kiyosaki"}},
+ {
+	"model": "books.author",
+ 	"pk": 10,
+ 
+	"fields": {
+		"first_name": "Ron",
+ 		"last_name": "Chernow"}},
+ {
+	"model": "books.author",
+ 	"pk": 11,
+ 	"fields": {
+		"first_name": "Kamil",
+ 		"last_name": "Cebulski"}}]
