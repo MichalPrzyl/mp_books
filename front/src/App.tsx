@@ -6,18 +6,25 @@ import { Button, Col, Row } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import AddBookModal from './add-book';
 import CustomDataTable from './my-columns';
-import { IData }  from './main-interfaces'
+import { IData, IRow } from './main-interfaces'
 import { columns } from './main-columns'
+import swal from 'sweetalert';
 
 
 const App = () => {
 
   const [data, setData] = useState<IData[]>([])
-  const [selectedRows, setSelectedRows] = useState<IData[]>([])
+  const [selectedRows, setSelectedRows] = useState<IData>()
 
   useEffect(() => {
     getData();
   }, [])
+
+  // useEffect(() => {
+  //   // getData();
+    
+  //   // thisOne = {...thisOne, isSelected:true}
+  // }, [selectedRows])
 
   const getData = async () => {
     const response = await axios.get('http://localhost:8000/books')
@@ -25,14 +32,74 @@ const App = () => {
   }
 
   const handleDelete = async () => {
-    const response = await axios.delete(`http://localhost:8000/books/${selectedRows[0]}`)
+
+
+    // swal({
+    //   title: "Are you sure?",
+    //   text: "Once deleted, you will not be able to recover this imaginary file!",
+    //   icon: "warning",
+    //   buttons: ["Oh noez!", "Aww yiss!"],
+    //   dangerMode: true,
+    // })
+    // .then((willDelete) => {
+    //   if (willDelete) {
+    //     const response = axios.delete(`http://localhost:8000/books/${selectedRows?.id}`)
+    //     swal("Poof! Your imaginary file has been deleted!", {
+    //       icon: "success",
+    //     });
+    //   } else {
+    //     swal("Your imaginary file is safe!");
+    //   }
+    // });
+
+
+    if(await swal({title: "Jesteś pewien?",text: "Tej operacji nie da się cofnąć. Rekord zostanie usunięty",icon: "warning",buttons: ["Anuluj", "Usuń"],dangerMode: true}))
+      {
+      await axios.delete(`http://localhost:8000/books/${selectedRows?.id}`)
+      swal("Poof! Your imaginary file has been deleted!", {icon: "success",})
+    }
+    
+
     getData();
+    
+  }
+
+  const handleClick = (row: any) =>{
+    const copy = data.map(el => ({...el, isSelected: false}))
+    const index = data.indexOf(row)
+    row.isSelected = true;
+    copy[index] = row
+    setData(copy)
+    setSelectedRows(row)
   }
 
 
-  const handleRowSelected = (selected: any) => {
-    setSelectedRows(selected.map((el: any) => el.id))
-  }
+
+  const conditionalRowStyles = [
+    // {
+    //   when: row => row.calories < 300,
+    //   style: {
+    //     backgroundColor: 'green',
+    //     color: 'white',
+    //     '&:hover': {
+    //       cursor: 'pointer',
+    //     },
+    //   },
+    // },
+    // You can also pass a callback to style for additional customization
+    {                          
+      when: (row: IRow) => row.isSelected == true,
+      style: (row: IRow) => ({ backgroundColor: 'rgba(63, 195, 128, 0.9)', color: 'white' }),
+    },
+  ];
+
+
+
+
+
+
+
+
 
   return (
     <div className="container-fluid cont">
@@ -43,13 +110,21 @@ const App = () => {
         <Button onClick={handleDelete} variant="danger">Usuń</Button>{' '}
       </div>
 
-  
+
       {/* HERE IS THE MAGIC */}
 
       <div className='table'>
-        <CustomDataTable 
+        {/* <CustomDataTable 
         data={data}
-        columns={columns}
+        columns={columns} */}
+        <DataTable
+          columns={columns}
+          data={data}
+          // selectableRows
+          // onSelectedRowsChange={(selected) => handleRowSelected(selected.selectedRows)}
+          onRowClicked={(row) => handleClick(row)}
+          conditionalRowStyles={conditionalRowStyles}
+          // customStyles={customStyles}
         />
       </div>
     </div>
