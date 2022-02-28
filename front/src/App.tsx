@@ -79,11 +79,11 @@ const App = () => {
 };
   return (
     <div className="container-fluid cont">
-      <h1>Lista książek</h1>
+      <h1 className="title">Lista książek</h1>
       <div className="button-container d-flex">
-        <Button onClick={getData} variant="primary">Odśwież</Button>{' '}
-        <AddBookModal className="mx-3" refreshData={getData} />
-        <Button onClick={handleDelete} variant="danger">Usuń</Button>{' '}
+        <Button className="custom-styled-btn" onClick={getData} variant="primary">Odśwież</Button>{' '}
+        <AddBookModal className="mx-3 custom-styled-btn" refreshData={getData} />
+        <Button className="custom-styled-btn" onClick={handleDelete} variant="danger">Usuń</Button>{' '}
       </div>
 
 

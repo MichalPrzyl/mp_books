@@ -1,14 +1,25 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 body{
   margin: 10px;
+  --main-background: #282F44;
 }
 .cont{
   border: 1px solid black;
 }
 
+.button-container{
+  margin-top: 50px;
+  /* border: 1px solid black; */
+}
+
 .book{
   /* background: rgb(255, 118, 118); */
   /* border-top: 1px solid black; */
+}
+
+.title{
+  color: white;
+  text-align: center;
 }
 
 .text-right{
@@ -27,11 +38,23 @@ body{
   background: rgb(175, 175, 175);
 }
 
+.custom-styled-btn{
+  --selected: #6D3B47;
+  --tableBackground: #453A49;
+  --backgroundHeader: #6D3B47;
+
+  /* background: var(--backgroundHeader); */
+  /* background: var(--selected); */
+  /* background: var(--tableBackground); */
+  background: var(--main-background);
+  color: white;
+  /* border: 1px solid white; */
+}
 
 body{
-  background: #282F44;
+  background: var(--main-background);
   /* color: #9D91A3; */
-  color: white;
+  /* color: white; */
 }
 
 .table{
