@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Button, Col, Row } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import AddBookModal from './add-book';
-import CustomDataTable from './my-columns';
 import { IData, IRow } from './main-interfaces'
 import { columns } from './main-columns'
 import swal from 'sweetalert';
@@ -20,48 +19,18 @@ const App = () => {
     getData();
   }, [])
 
-  // useEffect(() => {
-  //   // getData();
-    
-  //   // thisOne = {...thisOne, isSelected:true}
-  // }, [selectedRows])
-
   const getData = async () => {
     const response = await axios.get('http://localhost:8000/books')
     setData(response.data)
   }
 
   const handleDelete = async () => {
-
-
-    // swal({
-    //   title: "Are you sure?",
-    //   text: "Once deleted, you will not be able to recover this imaginary file!",
-    //   icon: "warning",
-    //   buttons: ["Oh noez!", "Aww yiss!"],
-    //   dangerMode: true,
-    // })
-    // .then((willDelete) => {
-    //   if (willDelete) {
-    //     const response = axios.delete(`http://localhost:8000/books/${selectedRows?.id}`)
-    //     swal("Poof! Your imaginary file has been deleted!", {
-    //       icon: "success",
-    //     });
-    //   } else {
-    //     swal("Your imaginary file is safe!");
-    //   }
-    // });
-
-
     if(await swal({title: "Jesteś pewien?",text: "Tej operacji nie da się cofnąć. Rekord zostanie usunięty",icon: "warning",buttons: ["Anuluj", "Usuń"],dangerMode: true}))
-      {
+    {
       await axios.delete(`http://localhost:8000/books/${selectedRows?.id}`)
       swal("Poof! Your imaginary file has been deleted!", {icon: "success",})
     }
-    
-
     getData();
-    
   }
 
   const handleClick = (row: any) =>{
@@ -75,66 +44,43 @@ const App = () => {
 
 
   interface IColor{
-    primary: string;
-    secondary: string;
-    background: string;
+    selected: string;
+    tableBackground: string;
+    backgroundHeader: string;
   }
   const colors : IColor = 
     {
-      primary: '#FE938C',
-      secondary: '#EDAF97',
-      background: '#674642'
+      selected: '#6D3B47',
+      tableBackground: '#453A49',
+      backgroundHeader: '#6D3B47'
     }
   
   const conditionalRowStyles = [
-    // {
-    //   when: row => row.calories < 300,
-    //   style: {
-    //     backgroundColor: 'green',
-    //     color: 'white',
-    //     '&:hover': {
-    //       cursor: 'pointer',
-    //     },
-    //   },
-    // },
-    // You can also pass a callback to style for additional customization
     {
       when: (row: IRow) => row.title.length > 0,
-      style: (row: IRow) => ({background: colors.secondary})
+      style: (row: IRow) => ({background: colors.tableBackground, 
+        color: 'white',
+        borderRadius: '5px'})
     },
     {                          
       when: (row: IRow) => row.isSelected == true,
-      // style: (row: IRow) => ({ backgroundColor: 'rgba(63, 195, 128, 0.9)', color: '#CC5803' }),
-      style: (row: IRow) => ({ backgroundColor: colors.primary, color: 'black' }),
+      style: (row: IRow) => ({ backgroundColor: colors.selected, color: 'white' }),
     },
   ];
 
   const customStyles = {
-    // rows: {
-    //     style: {
-    //         minHeight: '72px', // override the row height
-    //     },
-    // },
-    headCells: {
+    rows: {
         style: {
-            background: colors.background, // override the cell padding for head cells
-            color: 'white'
+            cursor: 'pointer'
         },
     },
-    // cells: {
-    //     style: {
-    //         paddingLeft: '8px', // override the cell padding for data cells
-    //         paddingRight: '8px',
-    //     },
-    // },
+    headCells: {
+        style: {
+            background: colors.backgroundHeader,
+            color: 'white',
+        },
+    },
 };
-
-
-
-
-
-
-
   return (
     <div className="container-fluid cont">
       <h1>Lista książek</h1>
@@ -148,14 +94,9 @@ const App = () => {
       {/* HERE IS THE MAGIC */}
 
       <div className='table'>
-        {/* <CustomDataTable 
-        data={data}
-        columns={columns} */}
         <DataTable
           columns={columns}
           data={data}
-          // selectableRows
-          // onSelectedRowsChange={(selected) => handleRowSelected(selected.selectedRows)}
           onRowClicked={(row) => handleClick(row)}
           conditionalRowStyles={conditionalRowStyles}
           customStyles={customStyles}

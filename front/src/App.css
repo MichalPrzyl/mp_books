@@ -29,11 +29,15 @@ body{
 
 
 body{
-  background: #C49792;
-  color: 9D91A3;
+  background: #282F44;
+  /* color: #9D91A3; */
+  color: white;
 }
 
-.rdt_TableRow{
+.table{
+  margin-top: 75px;
+}
+/* .rdt_TableRow{
   cursor: pointer;
   background: red;
 }
@@ -44,4 +48,8 @@ body{
 
 .rdt_TableHeader{
   background: blue;
+} */
+
+.rdt_TableHeader{
+  border-radius: 50px;
 }
